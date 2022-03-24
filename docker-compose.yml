@@ -1,0 +1,15 @@
+---
+version: "3"
+
+services:
+  postgres:
+    image: postgres:10.6
+    ports:
+      - ${DB_PORT:-5432}:5432
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:5.0
+    ports:
+      - ${REDIS_PORT:-6379}:6379

@@ -1,0 +1,44 @@
+version: "3.7"
+
+# TODO: MIGRATIONS
+
+services:
+  rails:
+    build: .
+    restart: always
+    networks:
+      - infra_internal
+      - traefik
+    ports:
+      - 3000
+    command: bundle exec puma -C config/puma.rb
+    environment:
+      DATABASE_URL: p
+      SECRET_KEY_BASE: C
+    labels:
+      - traefik.http.routers.cryptol-rails.tls=true
+      - traefik.http.routers.cryptol-rails.rule=Host(`
+    volumes:
+      - .:/app
+
+  sidekiq:
+    build: .
+    restart: always
+    networks:
+      - infra_internal
+      - traefik
+    command: bundle exec sidekiq
+    environment:
+      DATABASE_URL: p
+      SECRET_KEY_BASE: C
+    labels:
+      # - traefik.http.routers.cryptol-rails-sidekiq.tls=true
+      # - traefik.http.routers.cryptol-rails-sidekiq.rule=Host(`c
+    volumes:
+      - .:/app
+
+networks:
+  infra_internal:
+    external: true
+  traefik:
+    external: true
