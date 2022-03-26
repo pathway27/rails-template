@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+echo "bin/entry" $(ruby -v) $(rails -v)
+rails db:create db:migrate
+rails assets:precompile
+echo
+
+exec "$@"
