@@ -14,9 +14,13 @@ services:
     environment:
       DATABASE_URL: p
       SECRET_KEY_BASE: C
+      REDIS_URL: r
+      REDIS_PROVIDER: REDIS_URL
       RAILS_DEVELOPMENT_HOSTS: v
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: TRUE
+      SIDEKIQ_USER: s
+      SIDEKIQ_PASSWORD: s
     labels:
       - traefik.http.routers.cryptol-rails.tls=true
       - traefik.http.routers.cryptol-rails.rule=Host(`v
