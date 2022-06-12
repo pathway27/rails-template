@@ -1,4 +1,4 @@
-FROM ruby:3.1.1-alpine AS base
+FROM ruby:3.1.2-alpine AS base
 
 RUN apk add --update postgresql-client \
 		     tzdata \
